@@ -12,11 +12,5 @@ if(os_type == "Windows" && os_arch == "x64") os_arch = "AMD64";
 try {
   module.exports = require(`./build/Release/ftdi-d2xx.${os_type}.${os_arch}.node`);
 } catch (e) {
-  try {
-    if(os.arch() == "x86" || os.arch() == "x64") {
-      module.exports = require(`./build/Release/ftdi-d2xx.${os_type}.x86_64.node`);
-    } else throw(true);
-  } catch (e) {
-    throw(new Error(`ftdi-d2xx: The library has not been compiled for this architecture (${os_type}/${os_arch}). Run "cmake-js rebuild".`));
-  }
+  throw(e);
 }
